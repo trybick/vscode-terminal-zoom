@@ -1,28 +1,32 @@
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  const config = vscode.workspace.getConfiguration();
-  console.log('config:', config);
-
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand(
-    'extension.helloWorld',
-    () => {
-      // The code you place here will be executed every time your command is executed
-
-      // Display a message box to the user
+  context.subscriptions.push(
+    vscode.commands.registerCommand('extension.helloWorld', () => {
       vscode.window.showInformationMessage('Hello World!');
-    }
+    })
   );
 
-  context.subscriptions.push(disposable);
+  const config = vscode.workspace.getConfiguration();
+	const fontSize = config.get<number>('terminal.integrated.fontSize') || 12;
+  config.update('terminal.integrated.fontSize', (fontSize + 5), true);
+
+
+
+
+
+	
+  // Functions created above will be used here
+  // context.subscriptions.push(
+  //   vscode.commands.registerCommand(
+  //     'fontshortcuts.increaseTerminalFontSize',
+  //     () => increaseFontSize(true) // replace this function
+  //   ),
+  //   vscode.commands.registerCommand(
+  //     'fontshortcuts.decreaseTerminalFontSize',
+  //     () => decreaseFontSize(true)
+  //   )
+  // );
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
