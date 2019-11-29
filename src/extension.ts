@@ -19,10 +19,6 @@ export function activate(context: vscode.ExtensionContext) {
   const setFontSize = (newLevel: number): Thenable<void> =>
     vscode.workspace.getConfiguration().update(terminalFontSize, newLevel, true);
 
-  // async function setFontSize() {
-  //   vscode.window.showQuickPick(['test', 'test2']);
-  // }
-
   const increaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   increaseLabel.text = '+';
   increaseLabel.tooltip = 'Increase Terminal Font Size';
@@ -30,11 +26,11 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(increaseLabel);
   increaseLabel.show();
 
-  const resetLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-  resetLabel.text = 'Terminal';
-  resetLabel.command = 'fontshortcuts.decreaseTerminalFontSize';
-  context.subscriptions.push(resetLabel);
-  resetLabel.show();
+  const setLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+  setLabel.text = 'Terminal';
+  setLabel.command = 'terminalFontSize.openQuickPick';
+  context.subscriptions.push(setLabel);
+  setLabel.show();
 
   const decreaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   decreaseLabel.text = '-';
@@ -44,10 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
   decreaseLabel.show();
 
   async function openQuickPick() {
-    const options: vscode.QuickPickItem[] = [
-      { label: '20' },
-      { label: '10' }
-    ];
+    const options: vscode.QuickPickItem[] = [{ label: '20' }, { label: '10' }];
 
     const selection = await vscode.window.showQuickPick(options, {
       placeHolder: 'Please choose a terminal font-size:'
@@ -65,10 +58,8 @@ export function activate(context: vscode.ExtensionContext) {
     ),
     vscode.commands.registerCommand('fontshortcuts.increaseTerminalFontSize', () =>
       increaseFontSize()
-    )
-    // vscode.commands.registerCommand('fontshortcuts.increaseTerminalFontSize', () => // what should this string command be
-    //   openQuickPick()
-    // )
+    ),
+    vscode.commands.registerCommand('terminalFontSize.openQuickPick', () => openQuickPick())
   );
 }
 

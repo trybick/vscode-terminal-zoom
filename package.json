@@ -10,9 +10,9 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.helloWorld",
     "onCommand:fontshortcuts.decreaseTerminalFontSize",
-    "onCommand:fontshortcuts.increaseTerminalFontSize"
+    "onCommand:fontshortcuts.increaseTerminalFontSize",
+    "onCommand:terminalFontSize.openQuickPick"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -28,6 +28,10 @@
       {
         "command": "fontshortcuts.increaseTerminalFontSize",
         "title": "Increase font size"
+      },
+      {
+        "command": "terminalFontSize.openQuickPick",
+        "title": "Set font size"
       }
     ]
   },
