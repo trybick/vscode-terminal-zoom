@@ -2,6 +2,11 @@ import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
   const terminalFontSize = 'terminal.integrated.fontSize';
+  const cmds = {
+    increaseSize: 'fontshortcuts.increaseTerminalFontSize',
+    decreaseSize: 'fontshortcuts.decreaseTerminalFontSize',
+    setSize: 'terminalFontSize.openQuickPick'
+  };
 
   function getCurrentSize() {
     const config = vscode.workspace.getConfiguration();
@@ -22,20 +27,20 @@ export function activate(context: vscode.ExtensionContext) {
   const increaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   increaseLabel.text = '+';
   increaseLabel.tooltip = 'Increase Terminal Font Size';
-  increaseLabel.command = 'fontshortcuts.increaseTerminalFontSize';
+  increaseLabel.command = cmds.increaseSize;
   context.subscriptions.push(increaseLabel);
   increaseLabel.show();
 
   const setLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   setLabel.text = 'Terminal';
-  setLabel.command = 'terminalFontSize.openQuickPick';
+  setLabel.command = cmds.setSize;
   context.subscriptions.push(setLabel);
   setLabel.show();
 
   const decreaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   decreaseLabel.text = '-';
   decreaseLabel.tooltip = 'Decrease Terminal Font Size';
-  decreaseLabel.command = 'fontshortcuts.decreaseTerminalFontSize';
+  decreaseLabel.command = cmds.decreaseSize;
   context.subscriptions.push(decreaseLabel);
   decreaseLabel.show();
 
@@ -50,16 +55,10 @@ export function activate(context: vscode.ExtensionContext) {
     setFontSize(Number(newFontSize));
   }
 
-  openQuickPick();
-
   context.subscriptions.push(
-    vscode.commands.registerCommand('fontshortcuts.decreaseTerminalFontSize', () =>
-      decreaseFontSize()
-    ),
-    vscode.commands.registerCommand('fontshortcuts.increaseTerminalFontSize', () =>
-      increaseFontSize()
-    ),
-    vscode.commands.registerCommand('terminalFontSize.openQuickPick', () => openQuickPick())
+    vscode.commands.registerCommand(cmds.decreaseSize, () => decreaseFontSize()),
+    vscode.commands.registerCommand(cmds.increaseSize, () => increaseFontSize()),
+    vscode.commands.registerCommand(cmds.setSize, () => openQuickPick())
   );
 }
 
