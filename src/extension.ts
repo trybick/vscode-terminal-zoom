@@ -16,6 +16,10 @@ export function activate(context: vscode.ExtensionContext) {
     setZoomLevel(getCurrentSize() - 1);
   }
 
+  // async function setFontSize() {
+  //   vscode.window.showQuickPick(['test', 'test2']);
+  // }
+
   const setZoomLevel = (newLevel: number): Thenable<void> =>
     vscode.workspace.getConfiguration().update(terminalFontSize, newLevel, true);
 
