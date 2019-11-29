@@ -1,32 +1,28 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
+  const terminalFontSize = 'terminal.integrated.fontSize';
+
+  async function increaseFontSize() {
+    const config = vscode.workspace.getConfiguration();
+    const currentSize = config.get<number>(terminalFontSize) || 12;
+    config.update(terminalFontSize, currentSize + 2, true);
+  }
+
+  async function decreaseFontSize() {
+    const config = vscode.workspace.getConfiguration();
+    const currentSize = config.get<number>(terminalFontSize) || 12;
+    config.update(terminalFontSize, currentSize - 2, true);
+  }
+
   context.subscriptions.push(
-    vscode.commands.registerCommand('extension.helloWorld', () => {
-      vscode.window.showInformationMessage('Hello World!');
-    })
+    vscode.commands.registerCommand('fontshortcuts.decreaseTerminalFontSize', () =>
+      decreaseFontSize()
+    ),
+    vscode.commands.registerCommand('fontshortcuts.increaseTerminalFontSize', () =>
+      increaseFontSize()
+    )
   );
-
-  const config = vscode.workspace.getConfiguration();
-	const fontSize = config.get<number>('terminal.integrated.fontSize') || 12;
-  config.update('terminal.integrated.fontSize', (fontSize + 5), true);
-
-
-
-
-
-	
-  // Functions created above will be used here
-  // context.subscriptions.push(
-  //   vscode.commands.registerCommand(
-  //     'fontshortcuts.increaseTerminalFontSize',
-  //     () => increaseFontSize(true) // replace this function
-  //   ),
-  //   vscode.commands.registerCommand(
-  //     'fontshortcuts.decreaseTerminalFontSize',
-  //     () => decreaseFontSize(true)
-  //   )
-  // );
 }
 
 export function deactivate() {}
