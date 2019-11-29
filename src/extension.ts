@@ -16,15 +16,16 @@ export function activate(context: vscode.ExtensionContext) {
     setZoomLevel(getCurrentSize() - 1);
   }
 
+  const setZoomLevel = (newLevel: number): Thenable<void> =>
+    vscode.workspace.getConfiguration().update(terminalFontSize, newLevel, true);
+
   // async function setFontSize() {
   //   vscode.window.showQuickPick(['test', 'test2']);
   // }
 
-  const setZoomLevel = (newLevel: number): Thenable<void> =>
-    vscode.workspace.getConfiguration().update(terminalFontSize, newLevel, true);
-
   const increaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   increaseLabel.text = '+';
+  increaseLabel.tooltip = 'Increase Terminal Font Size';
   increaseLabel.command = 'fontshortcuts.increaseTerminalFontSize';
   context.subscriptions.push(increaseLabel);
   increaseLabel.show();
@@ -37,6 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const decreaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   decreaseLabel.text = '-';
+  decreaseLabel.tooltip = 'Decrease Terminal Font Size';
   decreaseLabel.command = 'fontshortcuts.decreaseTerminalFontSize';
   context.subscriptions.push(decreaseLabel);
   decreaseLabel.show();
