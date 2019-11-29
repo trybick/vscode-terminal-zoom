@@ -19,10 +19,23 @@ export function activate(context: vscode.ExtensionContext) {
   const setZoomLevel = (newLevel: number): Thenable<void> =>
     vscode.workspace.getConfiguration().update(terminalFontSize, newLevel, true);
 
-  const myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-  myStatusBarItem.text = 'Test';
-  context.subscriptions.push(myStatusBarItem);
-  myStatusBarItem.show();
+  const increaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+  increaseLabel.text = '+';
+  increaseLabel.command = 'fontshortcuts.increaseTerminalFontSize';
+  context.subscriptions.push(increaseLabel);
+  increaseLabel.show();
+
+  const resetLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+  resetLabel.text = 'Terminal';
+  // resetLabel.command = 'fontshortcuts.decreaseTerminalFontSize';
+  context.subscriptions.push(resetLabel);
+  resetLabel.show();
+
+  const decreaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+  decreaseLabel.text = '-';
+  decreaseLabel.command = 'fontshortcuts.decreaseTerminalFontSize';
+  context.subscriptions.push(decreaseLabel);
+  decreaseLabel.show();
 
   context.subscriptions.push(
     vscode.commands.registerCommand('fontshortcuts.decreaseTerminalFontSize', () =>
