@@ -9,14 +9,14 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   async function increaseFontSize() {
-    setZoomLevel(getCurrentSize() + 1);
+    setFontSize(getCurrentSize() + 1);
   }
 
   async function decreaseFontSize() {
-    setZoomLevel(getCurrentSize() - 1);
+    setFontSize(getCurrentSize() - 1);
   }
 
-  const setZoomLevel = (newLevel: number): Thenable<void> =>
+  const setFontSize = (newLevel: number): Thenable<void> =>
     vscode.workspace.getConfiguration().update(terminalFontSize, newLevel, true);
 
   // async function setFontSize() {
@@ -32,7 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const resetLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   resetLabel.text = 'Terminal';
-  // resetLabel.command = 'fontshortcuts.decreaseTerminalFontSize';
+  resetLabel.command = 'fontshortcuts.decreaseTerminalFontSize';
   context.subscriptions.push(resetLabel);
   resetLabel.show();
 
@@ -43,6 +43,22 @@ export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(decreaseLabel);
   decreaseLabel.show();
 
+  async function openQuickPick() {
+    const options: vscode.QuickPickItem[] = [
+      { label: '20' },
+      { label: '10' }
+    ];
+
+    const selection = await vscode.window.showQuickPick(options, {
+      placeHolder: 'Please choose a terminal font-size:'
+    });
+
+    const newFontSize = selection && selection.label;
+    setFontSize(Number(newFontSize));
+  }
+
+  openQuickPick();
+
   context.subscriptions.push(
     vscode.commands.registerCommand('fontshortcuts.decreaseTerminalFontSize', () =>
       decreaseFontSize()
@@ -50,6 +66,9 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('fontshortcuts.increaseTerminalFontSize', () =>
       increaseFontSize()
     )
+    // vscode.commands.registerCommand('fontshortcuts.increaseTerminalFontSize', () => // what should this string command be
+    //   openQuickPick()
+    // )
   );
 }
 
