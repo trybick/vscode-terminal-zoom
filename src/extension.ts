@@ -1,10 +1,10 @@
-import * as vscode from 'vscode';
+import { commands, ExtensionContext, workspace } from 'vscode';
 import { cmds, strings } from './helpers/constants';
 import { statusBarItems } from './helpers/statusBar';
 import { openQuickPick } from './helpers/quickPickMenu';
 
 function getCurrentSize(): number {
-  const config = vscode.workspace.getConfiguration();
+  const config = workspace.getConfiguration();
   return config.get<number>(strings.terminalFontSize) || 12;
 }
 
@@ -17,14 +17,14 @@ function decreaseFontSize(): void {
 }
 
 export function setFontSize(newSetting: number): void {
-  vscode.workspace.getConfiguration().update(strings.terminalFontSize, newSetting, true);
+  workspace.getConfiguration().update(strings.terminalFontSize, newSetting, true);
 }
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand(cmds.decreaseSize, () => decreaseFontSize()),
-    vscode.commands.registerCommand(cmds.increaseSize, () => increaseFontSize()),
-    vscode.commands.registerCommand(cmds.setSize, () => openQuickPick()),
+    commands.registerCommand(cmds.decreaseSize, () => decreaseFontSize()),
+    commands.registerCommand(cmds.increaseSize, () => increaseFontSize()),
+    commands.registerCommand(cmds.setSize, () => openQuickPick()),
     ...statusBarItems
   );
 }

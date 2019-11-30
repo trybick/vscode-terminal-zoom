@@ -1,8 +1,8 @@
-import * as vscode from 'vscode';
-import { cmds, tooltips, IStatusBarItem } from './constants';
+import { StatusBarAlignment, window } from 'vscode';
+import { cmds, IStatusBarItem, tooltips } from './constants';
 
 function _createStatusBarItem({ text, tooltip, command }: IStatusBarItem) {
-  const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+  const item = window.createStatusBarItem(StatusBarAlignment.Right, 100);
   item.text = text;
   item.tooltip = tooltip;
   item.command = command;
