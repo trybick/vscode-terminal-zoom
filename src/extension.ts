@@ -1,12 +1,7 @@
 import { commands, ExtensionContext, workspace } from 'vscode';
 import { cmds, strings } from './helpers/constants';
-import { statusBarItems } from './helpers/statusBar';
+import { getCurrentSize, statusBarItems, updateStatusBar } from './helpers/statusBar';
 import { openQuickPick } from './helpers/quickPickMenu';
-
-function getCurrentSize(): number {
-  const config = workspace.getConfiguration();
-  return config.get<number>(strings.terminalFontSize) || 12;
-}
 
 function increaseFontSize(): void {
   setFontSize(getCurrentSize() + 1);
@@ -27,6 +22,8 @@ export function activate(context: ExtensionContext) {
     commands.registerCommand(cmds.setSize, () => openQuickPick()),
     ...statusBarItems
   );
+
+  workspace.onDidChangeConfiguration(() => updateStatusBar());
 }
 
 export function deactivate() {}

@@ -1,5 +1,10 @@
-import { StatusBarAlignment, window } from 'vscode';
-import { cmds, IStatusBarItem, tooltips } from './constants';
+import { StatusBarAlignment, window, workspace } from 'vscode';
+import { cmds, IStatusBarItem, strings, tooltips } from './constants';
+
+export function getCurrentSize(): number {
+  const config = workspace.getConfiguration();
+  return config.get<number>(strings.terminalFontSize) || 12;
+}
 
 function _createStatusBarItem({ text, tooltip, command }: IStatusBarItem) {
   const item = window.createStatusBarItem(StatusBarAlignment.Right, 100);
@@ -10,20 +15,34 @@ function _createStatusBarItem({ text, tooltip, command }: IStatusBarItem) {
   return item;
 }
 
-export const statusBarItems = [
-  _createStatusBarItem({
-    text: '+',
-    tooltip: tooltips.increase,
-    command: cmds.increaseSize
-  }),
-  _createStatusBarItem({
-    text: 'Terminal',
-    tooltip: tooltips.decrease,
-    command: cmds.setSize
-  }),
-  _createStatusBarItem({
-    text: '-',
-    tooltip: tooltips.set,
-    command: cmds.decreaseSize
-  })
-];
+const _increase = _createStatusBarItem({
+  text: '+',
+  tooltip: tooltips.increase,
+  command: cmds.increaseSize
+});
+
+const _title = _createStatusBarItem({
+  text: `Terminal ${getCurrentSize()}-pt`,
+  tooltip: tooltips.set,
+  command: cmds.setSize
+});
+
+const _decrease = _createStatusBarItem({
+  text: '-',
+  tooltip: tooltips.decrease,
+  command: cmds.decreaseSize
+});
+
+export const statusBarItems = [_increase, _title, _decrease];
+
+export function updateStatusBar() {
+  statusBarItems.forEach(i => {
+    i.hide();
+  });
+
+  _title.text = `Terminal ${getCurrentSize()}-pt`;
+
+  statusBarItems.forEach(i => {
+    i.show();
+  });
+}
