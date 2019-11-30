@@ -21,8 +21,8 @@ export function activate(context: vscode.ExtensionContext) {
     setFontSize(getCurrentSize() - 1);
   }
 
-  const setFontSize = (newLevel: number): Thenable<void> =>
-    vscode.workspace.getConfiguration().update(terminalFontSize, newLevel, true);
+  const setFontSize = (newSetting: number): Thenable<void> =>
+    vscode.workspace.getConfiguration().update(terminalFontSize, newSetting, true);
 
   const increaseLabel = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
   increaseLabel.text = '+';
@@ -45,14 +45,18 @@ export function activate(context: vscode.ExtensionContext) {
   decreaseLabel.show();
 
   async function openQuickPick() {
-    const options: vscode.QuickPickItem[] = [{ label: '20' }, { label: '10' }];
-
-    const selection = await vscode.window.showQuickPick(options, {
-      placeHolder: 'Please choose a terminal font-size:'
+    const placeHolder = 'Select a font-size for your terminal:';
+    const optionsRange = [...Array(25).keys()].filter(i => i >= 8 && i % 2 === 0); // even numbers from 8-24
+    const options: vscode.QuickPickItem[] = optionsRange.map(num => {
+      return { label: `${num.toString()}-pt` };
     });
 
-    const newFontSize = selection && selection.label;
-    setFontSize(Number(newFontSize));
+    const userSelection = await vscode.window.showQuickPick(options, { placeHolder });
+    const newFontSize = userSelection && userSelection.label.slice(0, -3);
+
+    if (newFontSize) {
+      setFontSize(Number(newFontSize));
+    }
   }
 
   context.subscriptions.push(
