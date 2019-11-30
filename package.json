@@ -10,28 +10,24 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:fontshortcuts.decreaseTerminalFontSize",
-    "onCommand:fontshortcuts.increaseTerminalFontSize",
+    "onCommand:terminalFontSize.decrease",
+    "onCommand:terminalFontSize.increase",
     "onCommand:terminalFontSize.openQuickPick"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.helloWorld",
-        "title": "Hello World"
+        "command": "terminalFontSize.decrease",
+        "title": "Decrease terminal font size"
       },
       {
-        "command": "fontshortcuts.decreaseTerminalFontSize",
-        "title": "Decrease font size"
-      },
-      {
-        "command": "fontshortcuts.increaseTerminalFontSize",
-        "title": "Increase font size"
+        "command": "terminalFontSize.increase",
+        "title": "Increase terminal font size"
       },
       {
         "command": "terminalFontSize.openQuickPick",
-        "title": "Set font size"
+        "title": "Set terminal font size"
       }
     ]
   },
@@ -39,8 +35,7 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile",
-    "test": "node ./out/test/runTest.js"
+    "pretest": "npm run compile"
   },
   "devDependencies": {
     "@types/glob": "^7.1.1",

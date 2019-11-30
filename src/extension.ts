@@ -3,8 +3,8 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
   const terminalFontSize = 'terminal.integrated.fontSize';
   const cmds = {
-    increaseSize: 'fontshortcuts.increaseTerminalFontSize',
-    decreaseSize: 'fontshortcuts.decreaseTerminalFontSize',
+    increaseSize: 'terminalFontSize.increase',
+    decreaseSize: 'terminalFontSize.decrease',
     setSize: 'terminalFontSize.openQuickPick'
   };
 
