@@ -6,11 +6,21 @@ interface IStatusBarItem {
   command: string;
 }
 
-const terminalFontSize = 'terminal.integrated.fontSize';
+const strings = {
+  terminalFontSize: 'terminal.integrated.fontSize',
+  quickPickPlaceholder: 'Select a font-size for your terminal:'
+};
+
 const cmds = {
   increaseSize: 'terminalFontSize.increase',
   decreaseSize: 'terminalFontSize.decrease',
   setSize: 'terminalFontSize.openQuickPick'
+};
+
+const tooltips = {
+  increase: 'Increase Terminal Font Size',
+  set: 'Set Terminal Font Size',
+  decrease: 'Decrease Terminal Font Size'
 };
 
 function createStatusBarItem({ text, tooltip, command }: IStatusBarItem) {
@@ -25,24 +35,24 @@ function createStatusBarItem({ text, tooltip, command }: IStatusBarItem) {
 const statusBarItems = [
   createStatusBarItem({
     text: '+',
-    tooltip: 'Increase Terminal Font Size',
+    tooltip: tooltips.increase,
     command: cmds.increaseSize
   }),
   createStatusBarItem({
     text: 'Terminal',
-    tooltip: 'Set Terminal Font Size',
+    tooltip: tooltips.decrease,
     command: cmds.setSize
   }),
   createStatusBarItem({
     text: '-',
-    tooltip: 'Decrease Terminal Font Size',
+    tooltip: tooltips.set,
     command: cmds.decreaseSize
   })
 ];
 
 function getCurrentSize(): number {
   const config = vscode.workspace.getConfiguration();
-  return config.get<number>(terminalFontSize) || 12;
+  return config.get<number>(strings.terminalFontSize) || 12;
 }
 
 function increaseFontSize(): void {
@@ -54,11 +64,11 @@ function decreaseFontSize(): void {
 }
 
 function setFontSize(newSetting: number): void {
-  vscode.workspace.getConfiguration().update(terminalFontSize, newSetting, true);
+  vscode.workspace.getConfiguration().update(strings.terminalFontSize, newSetting, true);
 }
 
 async function openQuickPick() {
-  const placeHolder = 'Select a font-size for your terminal:';
+  const placeHolder = strings.quickPickPlaceholder;
   const optionsRange = [...Array(25).keys()].filter(i => i >= 8 && i % 2 === 0); // even numbers from 8-24
   const options: vscode.QuickPickItem[] = optionsRange.map(num => {
     return { label: `${num.toString()}-pt` };
