@@ -15,32 +15,30 @@ function _createStatusBarItem({ text, tooltip, command }: IStatusBarItem) {
   return item;
 }
 
-const _increase = _createStatusBarItem({
-  text: '+',
-  tooltip: tooltips.increase,
-  command: cmds.increaseSize
-});
-
-const _title = _createStatusBarItem({
-  text: `Terminal ${getCurrentSize()}-pt`,
-  tooltip: tooltips.set,
-  command: cmds.setSize
-});
-
-const _decrease = _createStatusBarItem({
-  text: '-',
-  tooltip: tooltips.decrease,
-  command: cmds.decreaseSize
-});
-
-export const statusBarItems = [_increase, _title, _decrease];
+export const statusBarItems = [
+  _createStatusBarItem({
+    text: '+',
+    tooltip: tooltips.increase,
+    command: cmds.increaseSize
+  }),
+  _createStatusBarItem({
+    text: `Terminal ${getCurrentSize()}-pt`,
+    tooltip: tooltips.set,
+    command: cmds.setSize
+  }),
+  _createStatusBarItem({
+    text: '-',
+    tooltip: tooltips.decrease,
+    command: cmds.decreaseSize
+  })
+];
 
 export function updateStatusBar() {
   statusBarItems.forEach(i => {
     i.hide();
   });
 
-  _title.text = `Terminal ${getCurrentSize()}-pt`;
+  statusBarItems[1].text = `Terminal ${getCurrentSize()}-pt`;
 
   statusBarItems.forEach(i => {
     i.show();
