@@ -24,18 +24,26 @@ export async function openQuickPick() {
 }
 
 function _createQuickPickOptions() {
-  // Create array of even numbers 8-24
-  const numbers = [...Array(25).keys()].filter(i => i >= 8 && i % 2 === 0);
-  // Each item becomes a quick pick label containing its number
-  const options: QuickPickItem[] = numbers.map(n => {
-    return { label: `$(text-size) ${n.toString()}-pt` };
+  // Create array with 8-26
+  const numbers = [...Array(27).keys()].filter(i => i >= 8).map(String);
+  const options: QuickPickItem[] = numbers.map(num => {
+    return { label: `$(text-size) ${num}-pt` };
   });
+
+  const options2: QuickPickItem[] = options.map(num => {
+    if (num.label.slice(13, -3) === getCurrentSize().toString()) {
+      num.description = '(current)';
+      return num;
+    }
+    return num;
+  });
+
   // Add "custom size" option
-  options.unshift({
+  options2.unshift({
     label: customInputLabel
   });
 
-  return options;
+  return options2;
 }
 
 async function openCustomInput() {

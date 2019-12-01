@@ -3,15 +3,15 @@ import { cmds, strings } from './helpers/constants';
 import { getCurrentSize, statusBarItems, updateStatusBar } from './helpers/statusBar';
 import { openQuickPick } from './helpers/quickPickMenu';
 
-function increaseFontSize(): void {
+function increaseFontSize() {
   setFontSize(getCurrentSize() + 1);
 }
 
-function decreaseFontSize(): void {
+function decreaseFontSize() {
   setFontSize(getCurrentSize() - 1);
 }
 
-export function setFontSize(newSetting: number): void {
+export function setFontSize(newSetting: number) {
   workspace.getConfiguration().update(strings.terminalFontSize, newSetting, true);
 }
 
