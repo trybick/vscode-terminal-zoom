@@ -5,32 +5,42 @@ import { setFontSize } from '../extension';
 
 export async function openQuickPick() {
   const placeHolder = strings.quickPickPlaceholder;
-  const optionsRange = [...Array(25).keys()].filter(i => i >= 8 && i % 2 === 0); // even numbers from 8-24
+  const customInputLabel = strings.customInputLabel;
+
+  // Create array of even numbers 8-24
+  const optionsRange = [...Array(25).keys()].filter(i => i >= 8 && i % 2 === 0);
+  // Populate array
   const options: QuickPickItem[] = optionsRange.map(num => {
     return { label: `$(text-size) ${num.toString()}-pt` };
-    // FIXME ^^ the text-size is interferring with setting the number
+  });
+  // Add "custom" option
+  options.unshift({
+    label: customInputLabel
   });
 
-  options.push({
-    label: `$(pencil) Input font-size`
-  });
-
+  // Show QuickPick menu
   const userSelection = await window.showQuickPick(options, { placeHolder });
 
-  if (userSelection && userSelection.label === `$(pencil) Input font-size`) {
-    const enteredSize = await window.showInputBox({
-      prompt: 'Enter custom font-size',
-      value: String(getCurrentSize())
-    });
-    if (undefined !== enteredSize) {
-      setFontSize(Number(enteredSize));
-    }
+  // If "Custom size" is chosen
+  if (userSelection && userSelection.label === customInputLabel) {
+    openCustomInput();
     return;
   }
 
-  const newFontSize = userSelection && userSelection.label.slice(0, -3);
+  // Extract number
+  const newFontSize = userSelection && userSelection.label.slice(13, -3);
 
   if (newFontSize) {
     setFontSize(Number(newFontSize));
+  }
+}
+
+async function openCustomInput() {
+  const enteredSize = await window.showInputBox({
+    prompt: 'Enter custom font-size',
+    value: String(getCurrentSize())
+  });
+  if (enteredSize) {
+    setFontSize(Number(enteredSize));
   }
 }

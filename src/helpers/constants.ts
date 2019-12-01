@@ -6,7 +6,8 @@ export interface IStatusBarItem {
 
 export const strings = {
   terminalFontSize: 'terminal.integrated.fontSize',
-  quickPickPlaceholder: 'Select a font-size for your terminal:'
+  quickPickPlaceholder: 'Select a font-size for your terminal:',
+  customInputLabel: `$(pencil) Input custom size`
 };
 
 export const cmds = {
