@@ -7,11 +7,13 @@ const placeHolder = strings.quickPickPlaceholder;
 const customInputLabel = strings.customInputLabel;
 
 export async function openQuickPick() {
-  const options = _createQuickPickOptions();
-  const userSelection = await window.showQuickPick(options, { placeHolder });
+  const options: QuickPickItem[] = _createQuickPickOptions();
+  const userSelection: QuickPickItem | undefined = await window.showQuickPick(options, {
+    placeHolder
+  });
 
   if (userSelection && userSelection.label === customInputLabel) {
-    openCustomInput();
+    _openCustomInput();
     return;
   }
 
@@ -22,22 +24,16 @@ export async function openQuickPick() {
 }
 
 function _createQuickPickOptions() {
-  // Create array of 8-26
-  const numbers = [...Array(27).keys()].filter(i => i >= 8).map(String);
+  const numbers: string[] = [...Array(27).keys()].filter(i => i >= 8).map(String);
 
-  // Populate array
   const options: QuickPickItem[] = numbers.map(num => {
     const opt: QuickPickItem = { label: `${icons.typography} ${num}-pt` };
-
-    // Tag the current size
     if (num === getCurrentSize().toString()) {
       opt.description = strings.current;
     }
-
     return opt;
   });
 
-  // Add custom input
   options.unshift({
     label: customInputLabel
   });
@@ -45,11 +41,12 @@ function _createQuickPickOptions() {
   return options;
 }
 
-async function openCustomInput() {
+async function _openCustomInput() {
   const enteredSize = await window.showInputBox({
     prompt: strings.customSizePrompt,
     value: String(getCurrentSize())
   });
+
   if (enteredSize) {
     setFontSize(Number(enteredSize));
   }
