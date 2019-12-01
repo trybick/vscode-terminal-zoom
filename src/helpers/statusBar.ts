@@ -1,4 +1,4 @@
-import { StatusBarAlignment, window, workspace } from 'vscode';
+import { StatusBarAlignment, StatusBarItem, window, workspace } from 'vscode';
 import { cmds, IStatusBarItem, strings, tooltips } from './constants';
 
 export function getCurrentSize(): number {
@@ -6,12 +6,12 @@ export function getCurrentSize(): number {
   return config.get<number>(strings.terminalFontSize) || 12;
 }
 
-function _createStatusBarItem({ text, tooltip, command }: IStatusBarItem) {
+function _createStatusBarItem({ text, tooltip, command }: IStatusBarItem): StatusBarItem {
   const item = window.createStatusBarItem(StatusBarAlignment.Right, 100);
   item.text = text;
   item.tooltip = tooltip;
   item.command = command;
-  item.show();
+
   return item;
 }
 
@@ -34,13 +34,5 @@ export const statusBarItems = [
 ];
 
 export function updateStatusBar() {
-  statusBarItems.forEach(i => {
-    i.hide();
-  });
-
   statusBarItems[1].text = `Terminal ${getCurrentSize()}-pt`;
-
-  statusBarItems.forEach(i => {
-    i.show();
-  });
 }

@@ -24,6 +24,10 @@ export function activate(context: ExtensionContext) {
   );
 
   workspace.onDidChangeConfiguration(() => updateStatusBar());
+
+  statusBarItems.forEach(i => {
+    i.show();
+  });
 }
 
 export function deactivate() {}

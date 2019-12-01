@@ -10,9 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:terminalFontSize.decrease",
-    "onCommand:terminalFontSize.increase",
-    "onCommand:terminalFontSize.openQuickPick"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {

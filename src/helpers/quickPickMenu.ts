@@ -23,7 +23,7 @@ export async function openQuickPick() {
   }
 }
 
-function _createQuickPickOptions() {
+function _createQuickPickOptions(): QuickPickItem[] {
   const numbers: string[] = [...Array(27).keys()].filter(i => i >= 8).map(String);
 
   const options: QuickPickItem[] = numbers.map(num => {
