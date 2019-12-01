@@ -6,9 +6,10 @@ export interface IStatusBarItem {
 
 export const strings = {
   terminalFontSize: 'terminal.integrated.fontSize',
-  quickPickPlaceholder: 'Select a font-size for your terminal:',
+  quickPickPlaceholder: 'Select terminl font-size:',
   customInputLabel: `$(pencil) Input custom size`,
-  customSizePrompt: 'Enter font-size '
+  customSizePrompt: 'Enter font-size ',
+  current: '(current)'
 };
 
 export const cmds = {
@@ -21,4 +22,8 @@ export const tooltips = {
   increase: 'Increase Terminal Font Size',
   set: 'Set Terminal Font Size',
   decrease: 'Decrease Terminal Font Size'
+};
+
+export const icons = {
+  typography: `$(text-size)`
 };

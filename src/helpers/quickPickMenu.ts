@@ -1,6 +1,6 @@
 import { getCurrentSize } from './statusBar';
 import { QuickPickItem, window } from 'vscode';
-import { strings } from './constants';
+import { icons, strings } from './constants';
 import { setFontSize } from '../extension';
 
 const placeHolder = strings.quickPickPlaceholder;
@@ -10,13 +10,11 @@ export async function openQuickPick() {
   const options = _createQuickPickOptions();
   const userSelection = await window.showQuickPick(options, { placeHolder });
 
-  // If "custom size" is chosen
   if (userSelection && userSelection.label === customInputLabel) {
     openCustomInput();
     return;
   }
 
-  // If number is selected, extract number from string
   const newFontSize = userSelection && userSelection.label.slice(13, -3);
   if (newFontSize) {
     setFontSize(Number(newFontSize));
@@ -24,26 +22,27 @@ export async function openQuickPick() {
 }
 
 function _createQuickPickOptions() {
-  // Create array with 8-26
+  // Create array of 8-26
   const numbers = [...Array(27).keys()].filter(i => i >= 8).map(String);
+
+  // Populate array
   const options: QuickPickItem[] = numbers.map(num => {
-    return { label: `$(text-size) ${num}-pt` };
-  });
+    const opt: QuickPickItem = { label: `${icons.typography} ${num}-pt` };
 
-  const options2: QuickPickItem[] = options.map(num => {
-    if (num.label.slice(13, -3) === getCurrentSize().toString()) {
-      num.description = '(current)';
-      return num;
+    // Tag the current size
+    if (num === getCurrentSize().toString()) {
+      opt.description = strings.current;
     }
-    return num;
+
+    return opt;
   });
 
-  // Add "custom size" option
-  options2.unshift({
+  // Add custom input
+  options.unshift({
     label: customInputLabel
   });
 
-  return options2;
+  return options;
 }
 
 async function openCustomInput() {
