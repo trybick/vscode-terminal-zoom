@@ -1,7 +1,7 @@
 import { commands, ExtensionContext, workspace } from 'vscode';
 import { cmds, strings } from './helpers/constants';
 import { getCurrentSize, statusBarItems, updateStatusBar } from './helpers/statusBar';
-import { openQuickPick } from './helpers/quickPickMenu';
+import { openCustomInput } from './helpers/quickPickMenu';
 
 function increaseFontSize() {
   setFontSize(getCurrentSize() + 1);
@@ -19,7 +19,7 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand(cmds.decreaseSize, () => decreaseFontSize()),
     commands.registerCommand(cmds.increaseSize, () => increaseFontSize()),
-    commands.registerCommand(cmds.setSize, () => openQuickPick()),
+    commands.registerCommand(cmds.setSize, () => openCustomInput()),
     ...statusBarItems
   );
 

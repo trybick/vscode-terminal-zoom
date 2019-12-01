@@ -1,1 +1,3 @@
-to do
+# Terminal Zoom
+
+### Control terminal's font-size 
