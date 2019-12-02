@@ -6,8 +6,8 @@ export function getCurrentSize(): number {
   return config.get<number>(strings.terminalFontSize) || 12;
 }
 
-function _createStatusBarItem({ text, tooltip, command }: IStatusBarItem): StatusBarItem {
-  const item = window.createStatusBarItem(StatusBarAlignment.Right, 100);
+function _createStatusBarItem({ text, tooltip, command, priority }: IStatusBarItem): StatusBarItem {
+  const item = window.createStatusBarItem(StatusBarAlignment.Right, priority);
   item.text = text;
   item.tooltip = tooltip;
   item.command = command;
@@ -19,17 +19,20 @@ export const statusBarItems = [
   _createStatusBarItem({
     text: '+',
     tooltip: tooltips.increase,
-    command: cmds.increaseSize
+    command: cmds.increaseSize,
+    priority: 999
   }),
   _createStatusBarItem({
     text: `Terminal ${getCurrentSize()}-pt`,
     tooltip: tooltips.set,
-    command: cmds.setSize
+    command: cmds.setSize,
+    priority: 998
   }),
   _createStatusBarItem({
     text: '-',
     tooltip: tooltips.decrease,
-    command: cmds.decreaseSize
+    command: cmds.decreaseSize,
+    priority: 997
   })
 ];
 
