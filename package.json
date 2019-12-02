@@ -1,8 +1,8 @@
 {
   "name": "terminal-zoom",
   "displayName": "Terminal Zoom",
-  "description": "VSCode extension to control terminal font-size",
-  "version": "0.0.1",
+  "description": "Control font-size of terminal",
+  "version": "1.0.0",
   "publisher": "trybick",
   "bugs": {
     "url": "https://github.com/trybick/vscode-terminal-zoom/issues"
