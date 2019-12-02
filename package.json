@@ -29,15 +29,15 @@
     "commands": [
       {
         "command": "terminalFontSize.decrease",
-        "title": "Decrease terminal font size"
+        "title": "Terminal Zoom: Decrease terminal font size"
       },
       {
         "command": "terminalFontSize.increase",
-        "title": "Increase terminal font size"
+        "title": "Terminal Zoom: Increase terminal font size"
       },
       {
         "command": "terminalFontSize.openQuickPick",
-        "title": "Set terminal font size"
+        "title": "Terminal Zoom: Set terminal font size"
       }
     ]
   },
