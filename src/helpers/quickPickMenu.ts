@@ -13,7 +13,7 @@ export async function openQuickPick() {
   });
 
   if (userSelection && userSelection.label === customInputLabel) {
-    openCustomInput();
+    _openCustomInput();
     return;
   }
 
@@ -41,7 +41,7 @@ function _createQuickPickOptions(): QuickPickItem[] {
   return options;
 }
 
-export async function openCustomInput() {
+async function _openCustomInput() {
   const enteredSize = await window.showInputBox({
     prompt: strings.customSizePrompt,
     value: String(getCurrentSize())

@@ -1,7 +1,7 @@
 import { commands, ExtensionContext, workspace } from 'vscode';
 import { cmds, strings } from './helpers/constants';
 import { getCurrentSize, statusBarItems, updateStatusBar } from './helpers/statusBar';
-import { openCustomInput } from './helpers/quickPickMenu';
+import { openQuickPick } from './helpers/quickPickMenu';
 
 function increaseFontSize() {
   setFontSize(getCurrentSize() + 1);
@@ -19,14 +19,14 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand(cmds.decreaseSize, () => decreaseFontSize()),
     commands.registerCommand(cmds.increaseSize, () => increaseFontSize()),
-    commands.registerCommand(cmds.setSize, () => openCustomInput()),
+    commands.registerCommand(cmds.setSize, () => openQuickPick()),
     ...statusBarItems
   );
 
   workspace.onDidChangeConfiguration(() => updateStatusBar());
 
-  statusBarItems.forEach(i => {
-    i.show();
+  statusBarItems.forEach(item => {
+    item.show();
   });
 }
 
