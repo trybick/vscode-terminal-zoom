@@ -20,19 +20,19 @@ export const statusBarItems = [
     text: '+',
     tooltip: tooltips.increase,
     command: cmds.increaseSize,
-    priority: 999
+    priority: 999997
   }),
   _createStatusBarItem({
     text: `Terminal ${getCurrentSize()}-pt`,
     tooltip: tooltips.set,
     command: cmds.setSize,
-    priority: 998
+    priority: 999998
   }),
   _createStatusBarItem({
     text: '-',
     tooltip: tooltips.decrease,
     command: cmds.decreaseSize,
-    priority: 997
+    priority: 999999
   })
 ];
 
