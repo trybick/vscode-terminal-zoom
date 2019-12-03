@@ -2,7 +2,6 @@ export interface IStatusBarItem {
   text: string;
   tooltip: string;
   command: string;
-  priority: number;
 }
 
 export const strings = {
