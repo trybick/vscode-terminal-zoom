@@ -27,3 +27,7 @@ There are three command pallette commands:
 - `Terminal Zoom: Increase terminal font size` - Increase size by 1 pt
 - `Terminal Zoom: Decrease terminal font size` - Decrease size by 1 pt
 - `Terminal Zoom: Set terminal font size` - Open custom selection menu
+
+## License
+
+[MIT License](https://github.com/trybick/vscode-terminal-zoom/blob/master/LICENSE)
