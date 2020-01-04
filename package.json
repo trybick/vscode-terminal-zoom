@@ -12,6 +12,7 @@
     "type": "git",
     "url": "https://github.com/trybick/vscode-terminal-zoom.git"
   },
+  "icon": "./logo.png",
   "keywords": [
     "terminal",
     "zoom",
