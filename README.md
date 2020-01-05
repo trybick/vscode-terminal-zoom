@@ -5,11 +5,11 @@
 ![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/installs/trybick.terminal-zoom.svg)
 ![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/downloads/trybick.terminal-zoom.svg)
 
-VSCode extension to control the integrated terminal's font-size via status bar buttons and command pallette
+VSCode extension to control the terminal's font-size via status bar buttons and command pallette.
 
 ## Demo
 
-![Animated demo](https://user-images.githubusercontent.com/39889198/70085009-6f733b80-15dd-11ea-8eb1-d3bd4ba7b4b0.gif)
+![demo](demo.png)
 
 ## How To Use
 
