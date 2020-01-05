@@ -7,9 +7,9 @@
 
 VSCode extension to control the terminal's font-size via status bar buttons and command pallette.
 
-## Demo
+## Screenshot
 
-![demo](demo.png)
+![screenshot](images/screenshot.png)
 
 ## How To Use
 
