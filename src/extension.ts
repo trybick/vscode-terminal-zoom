@@ -1,6 +1,12 @@
-import { commands, ExtensionContext, workspace } from 'vscode';
+import { commands, ExtensionContext, workspace, window } from 'vscode';
 import { cmds, strings } from './helpers/constants';
-import { getCurrentSize, statusBarItems, updateStatusBar } from './helpers/statusBar';
+import {
+  getCurrentSize,
+  hideStatusBarItems,
+  showStatusBarItems,
+  statusBarItems,
+  updateStatusBar,
+} from './helpers/statusBar';
 import { openQuickPick } from './helpers/quickPickMenu';
 
 function increaseFontSize() {
@@ -15,6 +21,16 @@ export function setFontSize(newSetting: number) {
   workspace.getConfiguration().update(strings.terminalFontSize, newSetting, true);
 }
 
+function registerListeners() {
+  workspace.onDidChangeConfiguration(updateStatusBar);
+  window.onDidOpenTerminal(showStatusBarItems);
+  window.onDidCloseTerminal(() => {
+    if (!window.terminals.length) {
+      hideStatusBarItems();
+    }
+  });
+}
+
 export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand(cmds.decreaseSize, () => decreaseFontSize()),
@@ -23,11 +39,11 @@ export function activate(context: ExtensionContext) {
     ...statusBarItems
   );
 
-  workspace.onDidChangeConfiguration(() => updateStatusBar());
+  if (window.terminals.length) {
+    showStatusBarItems();
+  }
 
-  statusBarItems.forEach(item => {
-    item.show();
-  });
+  registerListeners();
 }
 
 export function deactivate() {}

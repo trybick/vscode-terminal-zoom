@@ -19,20 +19,28 @@ export const statusBarItems = [
   _createStatusBarItem({
     text: '+',
     tooltip: tooltips.increase,
-    command: cmds.increaseSize
+    command: cmds.increaseSize,
   }),
   _createStatusBarItem({
     text: `Terminal ${getCurrentSize()}-pt`,
     tooltip: tooltips.set,
-    command: cmds.setSize
+    command: cmds.setSize,
   }),
   _createStatusBarItem({
     text: '-',
     tooltip: tooltips.decrease,
-    command: cmds.decreaseSize
-  })
+    command: cmds.decreaseSize,
+  }),
 ];
 
 export function updateStatusBar() {
   statusBarItems[1].text = `Terminal ${getCurrentSize()}-pt`;
+}
+
+export function showStatusBarItems() {
+  statusBarItems.forEach((item) => item.show());
+}
+
+export function hideStatusBarItems() {
+  statusBarItems.forEach((item) => item.hide());
 }
