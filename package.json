@@ -4,6 +4,7 @@
   "description": "Control font-size of terminal",
   "version": "1.7.2",
   "publisher": "trybick",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/trybick/vscode-terminal-zoom/issues"
   },
@@ -23,7 +24,7 @@
     "vscode": "^1.40.0"
   },
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
