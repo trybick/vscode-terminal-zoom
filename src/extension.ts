@@ -1,6 +1,7 @@
 import { commands, ExtensionContext, workspace, window } from 'vscode';
 import { cmds, strings } from './helpers/constants';
 import {
+  disposeStatusBarItems,
   getCurrentSize,
   hideStatusBarItems,
   showStatusBarItems,
@@ -51,4 +52,6 @@ export function activate(context: ExtensionContext) {
   registerListeners();
 }
 
-export function deactivate() {}
+export function deactivate() {
+  disposeStatusBarItems();
+}

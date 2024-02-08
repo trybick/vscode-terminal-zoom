@@ -44,3 +44,7 @@ export function showStatusBarItems() {
 export function hideStatusBarItems() {
   statusBarItems.forEach((item) => item.hide());
 }
+
+export function disposeStatusBarItems() {
+  statusBarItems.forEach((item) => item.dispose());
+}
