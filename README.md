@@ -1,8 +1,8 @@
 # Terminal Zoom
 
-![Visual Studio Marketplace](https://vsmarketplacebadges.dev/version-short/trybick.terminal-zoom.svg)
-![Visual Studio Marketplace](https://vsmarketplacebadges.dev/downloads-short/trybick.terminal-zoom.svg)
-![Visual Studio Marketplace](https://vsmarketplacebadges.dev/rating-star/trybick.terminal-zoom.svg)
+![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/trybick.terminal-zoom?style=for-the-badge&color=%2341BC13)
+![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/d/trybick.terminal-zoom?style=for-the-badge)
+![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/stars/trybick.terminal-zoom?style=for-the-badge)
 
 Control the terminal font-size from the status bar and command pallette.
 
