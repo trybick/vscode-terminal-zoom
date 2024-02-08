@@ -4,8 +4,7 @@
 ![Visual Studio Marketplace](https://vsmarketplacebadges.dev/downloads-short/trybick.terminal-zoom.svg)
 ![Visual Studio Marketplace](https://vsmarketplacebadges.dev/rating-star/trybick.terminal-zoom.svg)
 
-
-VSCode extension to control the terminal's font-size via status bar buttons and command pallette.
+Control the terminal font-size from the status bar and command pallette.
 
 ## Screenshot
 
@@ -13,17 +12,24 @@ VSCode extension to control the terminal's font-size via status bar buttons and 
 
 ## How To Use
 
-Three buttons are added to the status bar:
+### Via the status bar
 
-- Click the `+` and `-` buttons on the status bar to increase/decrease the font-size by 1 pt
-- Click the middle `Terminal` button to bring up a selection menu to set a custom size
+Click the `+` and `-` buttons to increase/decrease the terminal font-size by 1 pt.
 
+Click the middle `Terminal` button to bring up a selection menu to set a custom size.
 
-There are also three command pallette commands:
+### Via the command pallette
 
-- `Terminal Zoom: Increase terminal font size` - Increase size by 1 pt
-- `Terminal Zoom: Decrease terminal font size` - Decrease size by 1 pt
-- `Terminal Zoom: Set terminal font size` - Open custom selection menu
+Type any of these commands in the command pallette:
+
+- `Terminal Zoom: Increase terminal font size`
+- `Terminal Zoom: Decrease terminal font size`
+- `Terminal Zoom: Set terminal font size`
+
+## Usage Notes
+
+The status bar buttons will be hidden if there are no terminals running. That way
+we don't clog up the status bar if terminals are not in use.
 
 ## License
 
