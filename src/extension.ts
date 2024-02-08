@@ -24,6 +24,11 @@ export function setFontSize(newSetting: number) {
 function registerListeners() {
   workspace.onDidChangeConfiguration(updateStatusBar);
   window.onDidOpenTerminal(showStatusBarItems);
+
+  // This only fires when a terminal is trashed, not when the panel is closed so
+  // it's currently possible to have no terminals visible and still see the
+  // status bar items. Ideally we'd have a way to check if the terminal panel is
+  // open.
   window.onDidCloseTerminal(() => {
     if (!window.terminals.length) {
       hideStatusBarItems();
