@@ -2,7 +2,7 @@
   "name": "terminal-zoom",
   "displayName": "Terminal Zoom",
   "description": "Control font-size of terminal",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "publisher": "trybick",
   "license": "MIT",
   "bugs": {
@@ -21,7 +21,7 @@
     "status bar"
   ],
   "engines": {
-    "vscode": "^1.40.0"
+    "vscode": "^1.75.0"
   },
   "activationEvents": [
     "onStartupFinished"
@@ -47,17 +47,22 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile"
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "devDependencies": {
-    "@types/glob": "^7.1.1",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^12.11.7",
-    "@types/vscode": "^1.40.0",
-    "glob": "^7.1.5",
-    "mocha": "^6.2.2",
-    "typescript": "^3.6.4",
-    "tslint": "^5.20.0",
-    "vscode-test": "^1.2.2"
+    "@types/vscode": "^1.75.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4",
+    "@vscode/test-electron": "^2.3.0"
   }
 }
