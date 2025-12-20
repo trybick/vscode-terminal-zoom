@@ -17,23 +17,23 @@ function _createStatusBarItem({ id, text, tooltip, command }: IStatusBarItem): S
 
 export const statusBarItems = [
   _createStatusBarItem({
-    id: 'terminalFontSize.increase',
-    text: '+',
-    tooltip: tooltips.increase,
-    command: cmds.increaseSize,
+    id: 'terminalFontSize.decrease',
+    text: '-',
+    tooltip: tooltips.decrease,
+    command: cmds.decreaseSize
   }),
   _createStatusBarItem({
     id: 'terminalFontSize.size',
     text: `Terminal ${getCurrentSize()}-pt`,
     tooltip: tooltips.set,
-    command: cmds.setSize,
+    command: cmds.setSize
   }),
   _createStatusBarItem({
-    id: 'terminalFontSize.decrease',
-    text: '-',
-    tooltip: tooltips.decrease,
-    command: cmds.decreaseSize,
-  }),
+    id: 'terminalFontSize.increase',
+    text: '+',
+    tooltip: tooltips.increase,
+    command: cmds.increaseSize
+  })
 ];
 
 export function updateStatusBar() {
