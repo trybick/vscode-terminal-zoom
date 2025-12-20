@@ -24,7 +24,7 @@ export const statusBarItems = [
   }),
   _createStatusBarItem({
     id: 'terminalFontSize.size',
-    text: `Terminal ${getCurrentSize()}-pt`,
+    text: `Terminal ${getCurrentSize()}pt`,
     tooltip: tooltips.set,
     command: cmds.setSize
   }),
@@ -37,7 +37,7 @@ export const statusBarItems = [
 ];
 
 export function updateStatusBar() {
-  statusBarItems[1].text = `Terminal ${getCurrentSize()}-pt`;
+  statusBarItems[1].text = `Terminal ${getCurrentSize()}pt`;
 }
 
 export function showStatusBarItems() {

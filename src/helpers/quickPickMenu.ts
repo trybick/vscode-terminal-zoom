@@ -17,17 +17,17 @@ export async function openQuickPick() {
     return;
   }
 
-  const newFontSize = userSelection && userSelection.label.slice(13, -3);
+  const newFontSize = userSelection && userSelection.label.slice(13, -2);
   if (newFontSize) {
     setFontSize(Number(newFontSize));
   }
 }
 
 function _createQuickPickOptions(): QuickPickItem[] {
-  const numbers: string[] = [...Array(27).keys()].filter(i => i >= 8).map(String);
+  const numbers: string[] = [...Array(27).keys()].filter((i) => i >= 8).map(String);
 
-  const options: QuickPickItem[] = numbers.map(num => {
-    const opt: QuickPickItem = { label: `${icons.typography} ${num}-pt` };
+  const options: QuickPickItem[] = numbers.map((num) => {
+    const opt: QuickPickItem = { label: `${icons.typography} ${num}pt` };
     if (num === getCurrentSize().toString()) {
       opt.description = strings.current;
     }
